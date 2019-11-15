@@ -1,0 +1,12 @@
+version: "3"
+#have a service called app, and the build section of the configuration will have a context which is '.' the root path.
+services:
+  app:
+    build:
+      context: . #current directory.
+    ports:
+      - "8000:8000" #Map our project from port 8000 on our HOST to port 8000 on our Image
+    volumes: #Volumes allows us to get the UPDATES that we make to our project INTO our Docker image in REAL-TIME. (AUTOMATIC CHANGES TO DOCKER IMAGE)
+      - ./app:/app # map our ./app folder to /app folder in the Docker image
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000" #sh -c #run the command using shell, #0.0.0.0:8000 run python server on all IPs on port 8000

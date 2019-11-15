@@ -1,0 +1,16 @@
+#THIS file tells Travis what to do everytime we push a change to our project
+language: python
+
+python:
+  - "3.6"
+
+#Make docker service available
+services:
+  - docker
+
+#Before Script: Script that travis will RUN before it executes any automation commands
+before_script: pip install docker-compose
+
+#Script to be executed -> if error, notify user.
+script:
+  - docker-compose run app sh -c "python manage.py test && flake8"

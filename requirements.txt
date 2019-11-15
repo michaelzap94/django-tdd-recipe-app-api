@@ -1,0 +1,7 @@
+# Install Latest Django: equal or higher than 2.2.6 and at most 2.3.0(version with NO breaking changes)
+Django>=2.2.6,<2.3.0
+
+djangorestframework>=3.10.3,<3.11.0
+
+flake8>=3.7.9,<3.8.0
+
