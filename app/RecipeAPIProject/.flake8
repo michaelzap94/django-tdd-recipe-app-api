@@ -1,8 +1,6 @@
 [flake8]
 ignore = 
-    E501,  # line too long
-exclude = 
-    migrations
-    __pycache__,
-    managepy,
-    settings.py
+  E501
+exclude =
+  migrations,
+  __pycache__
