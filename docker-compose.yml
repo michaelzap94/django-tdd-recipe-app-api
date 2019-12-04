@@ -10,3 +10,20 @@ services:
       - ./app:/app # map our ./app folder to /app folder in the Docker image
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000" #sh -c #run the command using shell, #0.0.0.0:8000 run python server on all IPs on port 8000
+    environment: 
+      - DB_HOST=db # has to equal db
+      - DB_NAME=app
+      - DB_USER=postgres
+      - DB_PASS=admin
+      #depends_on - set different service to depend on another service.
+    depends_on: 
+      - db # This app depends on db, therefore the db will be initialized first. 
+
+  db:
+    image: postgres:10-alpine # locate the postgress image on dockerhub website
+    environment: #environment variables
+      - POSTGRES_DB=app
+      - POSTGRES_USER=postgres
+      - POSTGRES-PASSWORD=admin
+
+

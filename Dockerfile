@@ -6,6 +6,17 @@ ENV PYTHONUNBUFFERED 1
 
 #copy from our requiresments.txt file anc paste it to the DOCKER image requirements.txt
 COPY ./requirements.txt/ requirements.txt
+
+# POSTGRESS-------------------------------------------------------------------------
+#Install postgresql client
+RUN apk add --update --no-cache postgresql-client
+# --virtual: sets up an alias for our dependencies that we can use to remove them later
+#.tmp-build-deps: temporal build dependencies
+RUN apk add --update --no-cache postgresql-client
+RUN apk add --update --no-cache --virtual .tmp-build-deps \
+      gcc libc-dev linux-headers postgresql-dev
+#-------------------------------------------------------------------------
+
 #Take the requirements file from DOCKERFILE we just copied and install the requirements
 RUN pip install -r /requirements.txt
 
