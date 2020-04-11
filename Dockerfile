@@ -12,9 +12,10 @@ COPY ./requirements.txt/ requirements.txt
 RUN apk add --update --no-cache postgresql-client
 # --virtual: sets up an alias for our dependencies that we can use to remove them later
 #.tmp-build-deps: temporal build dependencies
-RUN apk add --update --no-cache postgresql-client
 RUN apk add --update --no-cache --virtual .tmp-build-deps \
       gcc libc-dev linux-headers postgresql-dev
+RUN pip install -r /requirements.txt
+RUN apk del .tmp-build-deps
 #-------------------------------------------------------------------------
 
 #Take the requirements file from DOCKERFILE we just copied and install the requirements
