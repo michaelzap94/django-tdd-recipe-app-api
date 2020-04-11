@@ -74,6 +74,7 @@ WSGI_APPLICATION = 'RecipeAPIProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+#os.environ.get('NAME_OF_ENV') -> GET environmnet variables
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
