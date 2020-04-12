@@ -20,7 +20,8 @@ services:
       - DB_PASS=admin
       #depends_on - set different service to depend on another service.
     depends_on: 
-      - db # This app depends on db, therefore the db will be initialized first., 
+      - db # This app depends on db, therefore the db will be initialized first.,
+      # make sure you include some code "wait_for_db" to wait for the db to be ready before starting app
       #you can add multiple dependencies if you have multiple services: e.g: redis
   db:
     image: postgres:10-alpine # locate the postgress image on dockerhub website
