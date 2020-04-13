@@ -52,5 +52,8 @@ class UserAdmin(BaseUserAdmin):
     #########################################
 
 
-# Register our custom User model in the django Admin
+# Register our custom User model to SHOW UP in the django Admin
 admin.site.register(models.User, UserAdmin)
+# Register our custom Tag model to SHOW UP in the django Admin
+admin.site.register(models.Tag)
+

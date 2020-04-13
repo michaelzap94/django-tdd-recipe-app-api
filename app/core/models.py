@@ -2,6 +2,7 @@ from django.db import models
 # extend django user model AND CREATE YOUR OWN user model.
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
     PermissionsMixin
+from django.conf import settings
 
 # Manager class -> can create a user or super user
 
@@ -53,3 +54,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'  # Make the username field be the email
+
+
+class Tag(models.Model):
+    """Tag to be used for a recipe"""
+    name = models.CharField(max_length=255)
+    # settings.AUTH_USER_MODEL :
+    # AUTH_USER_MODEL = 'core.User' We want our User class Model inside our 'core' app to be the CUSTOM/default USER MODEL
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return self.name
