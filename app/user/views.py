@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, permissions, authentication
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 #our serializers class
@@ -17,3 +17,15 @@ class CreateTokenView(ObtainAuthToken):
     # (optional) sets the renderer UI so we can view A UI in the browser to create this object,
     #  otherwise we'll need Postman
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
+
+class ManageUserView(generics.RetrieveUpdateAPIView):
+    """Manage the authenticated user data"""
+    #override attribute from generics.RetrieveUpdateAPIView
+    serializer_class = UserSerializer
+    #override authentication and permission
+    authentication_classes = (authentication.TokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+    # we need to retrieve the object for the logged in user
+    def get_object(self):
+        """Retrieve and return authenticated user"""
+        return self.request.user
